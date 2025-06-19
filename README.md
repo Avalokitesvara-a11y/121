@@ -1,10 +1,3 @@
----
-
-## License
-
-This project is licensed under the Business Source License 1.1 (BSL).  
-Commercial or production use is prohibited without written permission.  
-See [LICENSE.md](./LICENSE.md) for full terms.
 
 # SATC Protocol: Pseudo-Derivative System for BTC Simulation
 
@@ -137,12 +130,13 @@ No margin. No regulated leverage. But:
 - Loyalty-based reward engines
 - Gamified Telegram bots
 - On-chain price oracle for transparency
-
 ---
 
 ## License
 
-Released under a restricted custom license. Redistribution or real-world deployment requires credit, disclosure, and full compliance with local regulations.
+This project is licensed under the Business Source License 1.1 (BSL).  
+Commercial or production use is prohibited without written permission.  
+See [LICENSE.md](./LICENSE.md) for full terms.
 
 ---
 
