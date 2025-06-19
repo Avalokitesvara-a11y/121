@@ -1,4 +1,3 @@
-
 # SATC Protocol: Pseudo-Derivative System for BTC Simulation
 
 SATC (Satoshi Contracts) is a virtual asset accounting system designed to emulate BTC price exposure, 
@@ -60,40 +59,54 @@ Any monetary exchange happens off-platform, between users, at their own risk.
 Command structure:
 
 ```
-*121*<asset_id>*<action>*<amount>*<price>#
+*121*<mode>*<action>*<amount>*<price>*<optional>#
 ```
 
 Example:
 ```
-*121*1*3*50*105000#
+*121*2*3*50*105000*2#
 ```
 
 Interpreted as:
-- Asset: BTC
+- Mode: 2 (SimTrade)
 - Action: 3 (Short)
 - Amount: 50 contracts (50,000 satoshi)
 - Entry price: $105,000/BTC
+- Multiplier: 2x leverage
 
 ---
 
 ## Trade Types
 
-| Code | Action       | Description                        |
-|------|--------------|------------------------------------|
-| 1    | Buy          | Acquire SATC with internal balance |
-| 2    | Sell         | Liquidate SATC holdings            |
-| 3    | Short        | Open downward speculation position |
-| 4    | Close Short  | Exit open short position           |
+| Mode | Action | Description                        |
+|------|--------|------------------------------------|
+| 1    | 1      | Buy SATC with mobile deposit       |
+| 1    | 2      | Sell SATC                          |
+| 1    | 9      | Deposit airtime                    |
+| 2    | 1      | Open Long                          |
+| 2    | 3      | Open Short                         |
+| 3    | 1      | Create P2P SATCâBTC offer          |
+| 3    | 2      | Accept P2P offer                   |
+| 3    | 6      | Confirm P2P trade                  |
+| 3    | 7      | Dispute or flag trade              |
 
 ---
 
 ## Risk System
 
-No margin. No leverage. But:
+No margin. No regulated leverage. But:
 
 - Optional pseudo-leverage via Multiplier
 - Multiplier boosts both profit and loss
-- Position auto-liquidation if balance insufficient
+- Position auto-liquidation if balance is insufficient
+
+---
+
+## Price Source
+
+- Price pulled from public BTC/USD oracles (Kraken, Binance)
+- Cached every X minutes
+- Used for market price, PnL, and SATC-USD conversion
 
 ---
 
@@ -128,4 +141,4 @@ Released under a restricted custom license. Redistribution or real-world deploym
 ## Author's Note
 
 SATC is not a toy. It's a deployment model for asymmetric environments. 
-Use it at your own risk — and make sure you're smarter than the regulator.
+Use it at your own risk âad make sure you're smarter than the regulator.
