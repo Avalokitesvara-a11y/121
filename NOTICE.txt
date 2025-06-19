@@ -1,7 +1,7 @@
 Project: 121
 Author: Avalokitesvara-a11y
 Date of initial release: 2025-06-19
-Repository: https://github.com/Avalokitesvara-a11y/121-SATC
+Repository: https://github.com/Avalokitesvara-a11y/121
 
 License: Business Source License 1.1
 Commercial or production use is restricted.
