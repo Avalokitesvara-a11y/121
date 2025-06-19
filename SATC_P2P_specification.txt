@@ -39,7 +39,7 @@ Step-by-step:
 
 1. User A posts an offer:
    - "Sell 1,000 SATC for $50"
-   - Chooses payment method: Tinkoff, PayPal, MTS, etc.
+   - Chooses payment method: PayPal, VISA MasterCard, etc.
 
 2. User B selects the offer and clicks "Buy"
 
