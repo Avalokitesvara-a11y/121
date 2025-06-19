@@ -1,0 +1,136 @@
+
+===========================
+SATC SYSTEM SPECIFICATION
+===========================
+
+Purpose:
+--------
+This document defines the structure and logic of a non-custodial, virtual BTC-based trading system
+using internal accounting units called SATC ("Satoshi Contracts"). The system avoids being classified
+as a derivative or financial service by design.
+
+------------------------------------
+1. UNIT DEFINITION: What is SATC?
+------------------------------------
+
+Name:        Satoshi Contract Unit (SATC)
+Symbol:      SATC
+Base Unit:   1 SATC = 1,000 satoshi = 0.00001000 BTC
+Pricing:     SATC value is derived from the current BTC/USD price. User trades SATC against USD.
+
+Nature:      SATC is an INTERNAL DIGITAL UNIT used purely for accounting.
+             It has no representation on blockchain.
+             It is not a derivative.
+             It is not backed by actual BTC (though the operator may hedge real exposure internally).
+
+Issuance:    Unlimited. Issued on demand upon user purchase.
+
+---------------------------------------------------
+2. TRADE MECHANICS (via USSD or other interface)
+---------------------------------------------------
+
+Command format: *121*asset_id*action*amount*price#
+
+  Example: *121*1*1*50*105000#
+  Means:   Buy 50 SATC (each = 0.00001 BTC) at price $105,000/BTC
+
+Parameters:
+- asset_id: numeric asset identifier (e.g., 1 = BTC)
+- action: 1 = Buy, 2 = Sell, 3 = Open Short
+- amount: number of SATC units to buy/sell/short
+- price: price per BTC in USD (limit order). Use 0 for market.
+
+Trading types:
+---------------
+- Buy:    Increase user's SATC holdings using internal USD balance
+- Sell:   Reduce user's SATC holdings, credit internal USD
+- Short:  Virtual position opened against BTC price.
+          No actual SATC is used. PnL is computed based on market move.
+
+-------------------------------------
+3. MARGIN AND MULTIPLIER SYSTEM
+-------------------------------------
+
+Leverage is not used to avoid regulatory problems.
+Instead, a simple Multiplier System is implemented:
+
+- Multiplier (M): 1x, 2x, 3x, etc.
+- PnL is calculated as:
+    ΔP = (current_price - entry_price)
+    Profit/Loss = ΔP * SATC amount * Multiplier
+
+- Multiplier increases both profit and risk.
+- User must have sufficient internal USD balance to cover worst-case loss.
+
+Optional: Set margin requirement for each multiplier level.
+
+------------------------
+4. BALANCE STRUCTURE
+------------------------
+
+Users have 3 types of balances:
+
+- USD balance: for funding and settlement
+- SATC balance: virtual BTC holdings
+- SHORT positions: stored separately with:
+    - entry_price
+    - amount
+    - multiplier
+    - open_time
+    - PnL = (entry_price - current_price) * amount * multiplier
+
+All balances are internal. No actual BTC or USD is moved on-chain.
+
+-------------------------------
+5. LEGAL STRUCTURE & COMPLIANCE
+-------------------------------
+
+Regulatory Risk Avoidance Strategy:
+
+1. SATC is NOT a financial instrument.
+   - It is not redeemable for BTC.
+   - It is not legally a security.
+   - It is not a contract for future delivery (no expiry, no settlement obligations).
+
+2. SATC is positioned as a **virtual unit inside a game-like environment**:
+   - “SATC is a virtual asset used to simulate trading experience.”
+   - “It has no value outside the platform and cannot be exchanged or withdrawn.”
+
+3. The user:
+   - Has no ownership of real BTC.
+   - Has no claim to any blockchain-based asset.
+   - Merely engages in price speculation against a virtual unit.
+
+4. Platform is not a broker:
+   - It does not act as intermediary between buyer/seller.
+   - It only maintains internal accounting and matches trades internally.
+
+5. No real leverage:
+   - Multiplier system is a controlled mathematical adjustment of exposure.
+   - No borrowing, no lending, no real margin.
+
+--------------------------------
+6. USER DISCLOSURE (REQUIRED)
+--------------------------------
+
+Terms of Service should clearly state:
+
+- “Trading SATC is a simulated activity.”
+- “No cryptocurrencies are purchased or sold on your behalf.”
+- “All balances are virtual.”
+- “You may lose all virtual USD or SATC balance based on market moves.”
+- “This is not a financial service.”
+
+------------------------
+7. EXTENSIONS (OPTIONAL)
+------------------------
+
+- Daily price feed from trusted source (e.g., Kraken API)
+- Position auto-liquidation if PnL exceeds available balance
+- Leaderboard and gamification
+- Referral rewards (in USD or SATC)
+- Optionally integrate Telegram bot or USSD frontend
+
+-------------------
+END OF SPECIFICATION
+-------------------
