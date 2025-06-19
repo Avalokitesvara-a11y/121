@@ -1,3 +1,10 @@
+---
+
+## License
+
+This project is licensed under the Business Source License 1.1 (BSL).  
+Commercial or production use is prohibited without written permission.  
+See [BSL.md](github.com/Avalokitesvara-a11y/LICENSE.md) for full terms.
 
 # SATC Protocol: Pseudo-Derivative System for BTC Simulation
 
