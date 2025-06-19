@@ -2,7 +2,7 @@
 Business Source License 1.1
 
 Licensor: Avalokitesvara-a11y
-Licensed Work: SATC Protocol (https://github.com/Avalokitesvara-a11y/121-SATC)
+Licensed Work: SATC Protocol (https://github.com/Avalokitesvara-a11y/121)
 
 Additional Use Grant:
 The Licensed Work may be used, copied, modified, and made available only for non-commercial, non-production use, testing, or academic research purposes.
